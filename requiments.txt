@@ -1,0 +1,4 @@
+Django==4.2
+environs==11.0.0
+pillow==10.4.0
+urllib3==2.2.2
