@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Place(models.Model):
     title = models.CharField(max_length=255, unique=True, verbose_name='Локация')
     description_short = models.TextField()
@@ -9,7 +10,6 @@ class Place(models.Model):
 
     def __str__(self):
         return self.title
-
 
     class Meta:
         verbose_name = 'Место'
