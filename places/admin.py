@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Place
+from .models import Place, Photo
 
 
 # @admin.register(Place)
@@ -10,3 +10,5 @@ from .models import Place
 # admin.site.register(Place, PlaceAdmin)
 
 admin.site.register(Place)
+
+admin.site.register(Photo)
