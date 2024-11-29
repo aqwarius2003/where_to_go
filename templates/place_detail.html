@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ place.properties.title }}</title>
+</head>
+<body>
+    <h1>{{ place.properties.title }}</h1>
+    <p>{{ place.properties.description_short }}</p>
+    <p>{{ place.properties.description_long }}</p>
+    <p>Coordinates: {{ place.geometry.coordinates }}</p>
+    <a href="{{ place.properties.detailsUrl }}">Details</a>
+</body>
+</html>
