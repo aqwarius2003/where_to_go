@@ -10,7 +10,7 @@ def generate_image_preview(obj):
         return format_html('<img src="{}" style="height: 100px;" />', obj.img.url)
     return "No Image"
 
-# class PlaceImageInline(SortableInlineAdminMixin, admin.TabularInline):
+
 class PlaceImageStackedInline(SortableStackedInline):
     model = Photo
     extra = 0
@@ -28,7 +28,7 @@ class PlaceImageStackedInline(SortableStackedInline):
 
 @admin.register(Place)
 class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
-        inlines = [PlaceImageStackedInline]
+    inlines = [PlaceImageStackedInline]
 
 
 @admin.register(Photo)
@@ -42,5 +42,3 @@ class PhotoAdmin(admin.ModelAdmin):
         return generate_image_preview(obj)
 
     image_preview.short_description = 'Превью'
-
-

@@ -17,6 +17,7 @@ class Place(models.Model):
         verbose_name_plural = 'Места'
         ordering = ['title']
 
+
 class Photo(models.Model):
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='photos')
     img = models.ImageField(verbose_name='Фото')
