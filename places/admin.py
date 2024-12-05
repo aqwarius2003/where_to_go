@@ -2,13 +2,19 @@ from django.contrib import admin
 from .models import Place, Photo
 
 
-# @admin.register(Place)
-# class PlaceAdmin(admin.ModelAdmin):
-#     list_display = ('title')
-#     search_fields = ('title')
-#
-# admin.site.register(Place, PlaceAdmin)
+class PlaceImageInline(admin.TabularInline):
+    model = Photo
 
-admin.site.register(Place)
+@admin.register(Place)
+class PlaceAdmin(admin.ModelAdmin):
+    inlines = [PlaceImageInline]
 
-admin.site.register(Photo)
+
+@admin.register(Photo)
+class PhotoAdmin(admin.ModelAdmin):
+    list_display = ('place', 'order')
+    list_editable = ('order',)
+    ordering = ('place', 'order')
+
+    def place(self, obj):
+        return obj.place.title
