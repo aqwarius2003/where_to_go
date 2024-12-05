@@ -14,7 +14,7 @@ class Place(models.Model):
     class Meta:
         verbose_name = 'Место'
         verbose_name_plural = 'Места'
-
+        ordering = ['title']
 
 class Photo(models.Model):
     place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='photos')
@@ -22,4 +22,7 @@ class Photo(models.Model):
     order = models.IntegerField(default=0, verbose_name='Порядковый номер')
 
     def __str__(self):
-        return f'{self.order} {self.place.title}'
+        return f'{self.order}'
+
+    class Meta:
+        ordering = ['order']
