@@ -15,6 +15,7 @@ class PlaceImageStackedInline(SortableStackedInline):
     model = Photo
     extra = 0
     verbose_name = 'Фото'
+    search_fields = ['place__title']
     verbose_name_plural = 'Фотографии'
     fields = ['img', 'order', 'image_preview']
     readonly_fields = ('image_preview',)
