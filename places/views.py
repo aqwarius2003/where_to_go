@@ -9,18 +9,18 @@ def index(request):
     places = Place.objects.all()
 
     feature_collection = {
-        "type": "FeatureCollection",
-        "features": [
+        'type': 'FeatureCollection',
+        'features': [
             {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [place.longitude, place.latitude]
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': [place.longitude, place.latitude]
                 },
-                "properties": {
-                    "title": place.title,
-                    "placeId": place.id,
-                    "detailsUrl": reverse('place', kwargs={'place_id': place.id})
+                'properties': {
+                    'title': place.title,
+                    'placeId': place.id,
+                    'detailsUrl': reverse('place', kwargs={'place_id': place.id})
     }
             }
             for place in places
@@ -36,13 +36,13 @@ def place_detail(request, place_id):
     place = get_object_or_404(Place, id=place_id)
 
     place_details = {
-        "title": place.title,
-        "imgs": [image.img.url for image in place.photos.all()],
-        "description_short": place.description_short,
-        "description_long": place.description_long,
-        "coordinates": {
-            "lat": place.latitude,
-            "lng": place.longitude,
+        'title': place.title,
+        'imgs': [image.img.url for image in place.photos.all()],
+        'description_short': place.description_short,
+        'description_long': place.description_long,
+        'coordinates': {
+            'lat': place.latitude,
+            'lng': place.longitude,
         }
     }
 
