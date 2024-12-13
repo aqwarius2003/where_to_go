@@ -7,7 +7,7 @@ from adminsortable2.admin import SortableAdminBase
 
 def generate_image_preview(obj):
     if hasattr(obj, 'img') and obj.img:
-        return format_html('<img src="{}" style="height: 100px;" />', obj.img.url)
+        return format_html('<img src="{}" style="height: 100px; width: 150px" />', obj.img.url)
     return "No Image"
 
 
