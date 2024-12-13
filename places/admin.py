@@ -29,6 +29,7 @@ class PlaceImageStackedInline(SortableStackedInline):
 @admin.register(Place)
 class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
     inlines = [PlaceImageStackedInline]
+    search_fields = ['title']
 
 
 @admin.register(Photo)
@@ -37,6 +38,8 @@ class PhotoAdmin(admin.ModelAdmin):
     readonly_fields = ('image_preview',)
     list_display = ('place', 'order', 'image_preview')
     ordering = ('place', 'order')
+    autocomplete_fields = ('place',)
+
 
     def image_preview(self, obj):
         return generate_image_preview(obj)
