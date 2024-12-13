@@ -8,13 +8,9 @@ from django.http import JsonResponse
 def index(request):
     places = Place.objects.all()
 
-    places_data = {
+    feature_collection = {
         "type": "FeatureCollection",
-        "features": []
-    }
-
-    for place in places:
-        places_data["features"].append(
+        "features": [
             {
                 "type": "Feature",
                 "geometry": {
@@ -23,14 +19,16 @@ def index(request):
                 },
                 "properties": {
                     "title": place.title,
-                    "placeId": place.id,  # id of the place
+                    "placeId": place.id,
                     "detailsUrl": reverse('place', kwargs={'place_id': place.id})
-                }
-            },
-        )
+    }
+            }
+            for place in places
+        ]
+    }
 
     return render(request, 'index.html', context={
-        'places': places_data
+        'places': feature_collection
     })
 
 
