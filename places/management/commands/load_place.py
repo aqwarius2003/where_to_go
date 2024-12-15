@@ -26,8 +26,8 @@ class Command(BaseCommand):
 
     @staticmethod
     def convert_to_raw(link):
-        if "github.com" in link:
-            link = link.replace("github.com", "raw.githubusercontent.com").replace("/blob/", "/")
+        if 'github.com' in link:
+            link = link.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/')
         return link
 
     def process_folder(self, folder_url):
@@ -37,9 +37,11 @@ class Command(BaseCommand):
             return
 
         html_content = response.text
-        raw_json_links = re.findall(r'href="(/devmanorg/where-to-go-places/blob/master/places/.*?\.json)"',
-                                    html_content)
-        base_url = "https://raw.githubusercontent.com"
+        raw_json_links = re.findall(
+            r'href="(/devmanorg/where-to-go-places/blob/master/places/.*?\.json)"',
+            html_content
+        )
+        base_url = 'https://raw.githubusercontent.com'
         json_links = [urljoin(base_url, link.replace('/blob/', '/')) for link in raw_json_links]
 
         for json_url in json_links:
