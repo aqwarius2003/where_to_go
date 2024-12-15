@@ -1,12 +1,13 @@
-from django.core.management.base import BaseCommand
-import requests
-from requests import RequestException
-
-from places.models import Place, Photo
-from django.core.files.base import ContentFile
-from urllib.parse import urlparse, urljoin
 import os
 import re
+from urllib.parse import urljoin, urlparse
+
+import requests
+from django.core.files.base import ContentFile
+from django.core.management.base import BaseCommand
+from requests import RequestException
+
+from places.models import Photo, Place
 
 
 class Command(BaseCommand):

@@ -1,4 +1,6 @@
+import os
 from pathlib import Path
+
 from environs import Env
 
 
@@ -116,7 +118,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'static/media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
 # Папка для хранения статических файлов во время разработки:
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
