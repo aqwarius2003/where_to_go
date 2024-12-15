@@ -57,19 +57,19 @@ class Command(BaseCommand):
             return
 
         try:
-            data = response.json()
+            raw_place = response.json()
         except ValueError as e:
             self.stdout.write(self.style.ERROR(f'Ошибка при разборе JSON с {json_url}: {e}'))
             return
 
         # Проверка на существование локации
         place, created = Place.objects.get_or_create(
-            title=data['title'],
+            title=raw_place['title'],
             defaults={
-                'description_short': data.get('description_short', ''),
-                'description_long': data.get('description_long', ''),
-                'latitude': data['coordinates']['lat'],
-                'longitude': data['coordinates']['lng'],
+                'description_short': raw_place.get('description_short', ''),
+                'description_long': raw_place.get('description_long', ''),
+                'latitude': raw_place['coordinates']['lat'],
+                'longitude': raw_place['coordinates']['lng'],
             }
         )
 
@@ -77,7 +77,7 @@ class Command(BaseCommand):
             self.stdout.write(self.style.WARNING(f'Локация "{place.title}" уже существует.'))
 
         # Независимо от того, была ли локация создана, проверяем и загружаем фотографии
-        for order, img_url in enumerate(data['imgs']):
+        for order, img_url in enumerate(raw_place['imgs']):
             img_name = os.path.basename(urlparse(img_url).path)
 
             # Проверка на существование фотографии
