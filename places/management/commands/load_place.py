@@ -66,8 +66,8 @@ class Command(BaseCommand):
         place, created = Place.objects.get_or_create(
             title=raw_place['title'],
             defaults={
-                'description_short': raw_place.get('description_short', ''),
-                'description_long': raw_place.get('description_long', ''),
+                'short_description': raw_place.get('description_short', ''),
+                'long_description': raw_place.get('description_long', ''),
                 'latitude': raw_place['coordinates']['lat'],
                 'longitude': raw_place['coordinates']['lng'],
             }
@@ -85,11 +85,13 @@ class Command(BaseCommand):
                 try:
                     img_response = requests.get(img_url)
                     img_response.raise_for_status()
-                    photo = Photo(
+
+                    content_file = ContentFile(img_response.content, name=img_name)
+                    photo = Photo.objects.create(
                         place=place,
-                        order=order
+                        order=order,
+                        img=content_file
                     )
-                    photo.img.save(img_name, ContentFile(img_response.content), save=True)
                     self.stdout.write(self.style.SUCCESS(f'Фото "{img_name}" добавлено.'))
                 except RequestException as e:
                     self.stdout.write(self.style.ERROR(f'Не удалось загрузить фото с {img_url}: {e}'))
